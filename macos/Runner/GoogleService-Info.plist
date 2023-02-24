@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>948773382394-t85uicujml4mk15noaq1lbd1071to1bn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.948773382394-t85uicujml4mk15noaq1lbd1071to1bn</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>948773382394-c4r1g1j8nsq434qbul3nb1lp5cmbccf1.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBbS9cKmDoFAZuFuWiVCHNJ4bMseMj_E-E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>948773382394</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.salatjanaza.salatJanaza</string>
+	<key>PROJECT_ID</key>
+	<string>salat-janaza-b30cf</string>
+	<key>STORAGE_BUCKET</key>
+	<string>salat-janaza-b30cf.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:948773382394:ios:46de4f813b615f34930143</string>
+</dict>
+</plist>

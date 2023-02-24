@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "638320411290",
+    "project_id": "salat-janaza-90f4f",
+    "storage_bucket": "salat-janaza-90f4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638320411290:android:7f22c40dec199ec6ef9523",
+        "android_client_info": {
+          "package_name": "com.salatjanaza.salat_janaza"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "638320411290-qdosjmp1uebp3o1k5sc0vqss14trn796.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpRxU8zLRcX2C6MFOhEJVOl10N3dlUuzw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "638320411290-qdosjmp1uebp3o1k5sc0vqss14trn796.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
