@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:lottie/lottie.dart';
-import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
 import 'package:salat_janaza/layout/rate.dart';
 import 'package:salat_janaza/layout/setting.dart';
 import 'package:salat_janaza/layout/share.dart';
