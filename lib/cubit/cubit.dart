@@ -1,27 +1,17 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:intl/intl.dart';
-import 'package:salat_janaza/services/database_helper.dart';
 
-import '../layout/component/component.dart';
-import '../model/login_model.dart';
 import '../model/model.dart';
 import 'state.dart';
-import 'package:sqflite/sqflite.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
@@ -32,7 +22,6 @@ class AppCubit extends Cubit<AppStates> {
   final fire = FirebaseFirestore.instance;
   final firestore = FirebaseFirestore.instance.collection('prayers');
   final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-
 
   var currentPosition;
 
@@ -116,7 +105,42 @@ class AppCubit extends Cubit<AppStates> {
     return Geolocator.distanceBetween(lat1, lon1, lat2, lon2);
   }
 
+  void registerNotification() async {
+    // 1. Initialize the Firebase app
+    await Firebase.initializeApp();
+
+    // 2. Instantiate Firebase Messaging
+   var messaging = FirebaseMessaging.instance;
+
+    // 3. On iOS, this helps to take the user permissions
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      badge: true,
+      provisional: false,
+      sound: true,
+    );
+
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print('User granted permission');
+      // TODO: handle the received notifications
+    } else {
+      print('User declined or has not accepted permission');
+    }
+  }
+
   permissions() async {
+    await FirebaseMessaging.instance.setAutoInitEnabled(true);
+    final fcmToken = await FirebaseMessaging.instance.getToken();
+    FirebaseMessaging.instance.onTokenRefresh
+        .listen((fcmToken) {
+      // TODO: If necessary send token to application server.
+
+      // Note: This callback is fired at each app startup and whenever a new
+      // token is generated.
+    })
+        .onError((err) {
+      // Error getting token.
+    });
     await FirebaseMessaging.instance
         .requestPermission(
       alert: true,
@@ -142,32 +166,7 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  // var firebase_app=FirebaseDatabase.instance.reference().child;
 
-  // FirebaseMessaging messaging = FirebaseMessaging.instance;
-  //
-  // NotificationSettings settings = await
-  //
-  // messaging.requestPermission
-  //
-  // (
-  //
-  // alert: true,
-  // announcement: false,
-  // badge: true,
-  // carPlay: false,
-  // criticalAlert: false,
-  // provisional: false,
-  // sound: true,
-  // );
-  //
-  // if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-  // print('User granted permission');
-  // } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-  // print('User granted provisional permission');
-  // } else {
-  // print('User declined or has not accepted permission');
-  // }
 
   Model? model;
   List<Model> deceaseds_posts = [];
@@ -244,8 +243,7 @@ class AppCubit extends Cubit<AppStates> {
         addMarker(element.data()['latitude'], element.data()['longitude']);
       });
       emit(GetDeceasedPostSuccessState(deceaseds_posts));
-      // }).catchError((error){
-      //   emit(GetDeceasedPostErrorState(error.toString()));
+
     });
   }
 
@@ -315,8 +313,6 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-
-
   List<Widget> markers = [
     TileLayer(
       urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -346,50 +342,12 @@ class AppCubit extends Cubit<AppStates> {
           ),
           markerSize: const Size(50, 50),
           markerDirection: MarkerDirection.heading,
-
         ),
       ));
     }
   }
-}
 
-// var fToast = FToast();
-// // if you want to use context from globally instead of content we need to pass navigatorKey.currentContext!
-// showToast() {
-//   Widget toast = Container(
-//     padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-//     decoration: BoxDecoration(
-//       borderRadius: BorderRadius.circular(25.0),
-//       color: Colors.greenAccent,
-//     ),
-//     child: Row(
-//       mainAxisSize: MainAxisSize.min,
-//       children: [
-//         Icon(Icons.check),
-//         SizedBox(
-//           width: 12.0,
-//         ),
-//         Text("This is a Custom Toast"),
-//       ],
-//     ),
-//   );
-//
-//
-//   fToast.showToast(
-//     child: toast,
-//     gravity: ToastGravity.BOTTOM,
-//     toastDuration: Duration(seconds: 2),
-//   );
-//
-//   // Custom Toast Position
-//   fToast.showToast(
-//       child: toast,
-//       toastDuration: Duration(seconds: 2),
-//       positionedToastBuilder: (context, child) {
-//         return Positioned(
-//           child: child,
-//           top: 16.0,
-//           left: 16.0,
-//         );
-//       });
-// }
+  Future sendNotificationFirebase() async {
+
+  }
+}

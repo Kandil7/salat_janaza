@@ -1,6 +1,5 @@
 import 'package:geolocator/geolocator.dart';
 
-import '../model/login_model.dart';
 import '../model/model.dart';
 
 abstract class AppStates {}
